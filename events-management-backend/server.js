@@ -10,11 +10,9 @@ const usersRouter = require('./routes/users');
 app.use(cors());
 app.use(bodyParser.json());
 
-// Підключення роутів
 app.use('/api/events', eventsRouter);
 app.use('/api/users', usersRouter);
 
-// Додати нову подію
 app.post('/api/events', (req, res) => {
     const { title, eventDate, organizer, description } = req.body;
     db.run("INSERT INTO events (title, eventDate, organizer, description) VALUES (?, ?, ?, ?)",
@@ -28,7 +26,6 @@ app.post('/api/events', (req, res) => {
     );
 });
 
-// Отримати всі події
 app.get('/api/events', (req, res) => {
     db.all("SELECT * FROM events", [], (err, rows) => {
         if (err) {
@@ -39,7 +36,6 @@ app.get('/api/events', (req, res) => {
     });
 });
 
-// Запуск сервера
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

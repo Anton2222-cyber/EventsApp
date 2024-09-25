@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 
-// Отримати всіх користувачів
 router.get('/', (req, res) => {
     User.getAllUsers((err, users) => {
         if (err) {
@@ -12,7 +11,6 @@ router.get('/', (req, res) => {
     });
 });
 
-// Отримати користувача за ID
 router.get('/:id', (req, res) => {
     const userId = req.params.id;
     User.getUserById(userId, (err, user) => {
@@ -26,11 +24,9 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// Створити нового користувача
 router.post('/', async (req, res) => {
-    const {fullName, email, dateOfBirth, source, eventId} = req.body;
+    const { fullName, email, dateOfBirth, source, eventId } = req.body;
 
-    // Перевірка, чи існує користувач з таким email
     User.getUserByEmail(email, (err, existingUser) => {
         if (err) {
             return res.status(500).json({ error: err.message });
@@ -39,7 +35,6 @@ router.post('/', async (req, res) => {
             return res.status(400).json({ message: 'Email already registered' });
         }
 
-        // Якщо користувача немає, створюємо нового
         User.createUser(fullName, email, dateOfBirth, source, eventId, function (err) {
             if (err) {
                 return res.status(500).json({ error: err.message });
@@ -48,5 +43,6 @@ router.post('/', async (req, res) => {
         });
     });
 });
+
 
 module.exports = router;

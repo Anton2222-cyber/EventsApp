@@ -12,7 +12,6 @@ const Event = {
         db.run("INSERT INTO events (title, eventDate, organizer, description) VALUES (?, ?, ?, ?)",
             [title, eventDate, organizer, description], callback);
     },
-    // Оновлення методу для сортування подій
     sortEvents: (sortBy, callback) => {
         const query = `SELECT * FROM events ORDER BY ${sortBy}`;
         db.all(query, callback);

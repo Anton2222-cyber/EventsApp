@@ -9,7 +9,6 @@ const EventsBoard = () => {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                // Надсилаємо запит на сервер з полем сортування
                 const response = await axios.get(`http://localhost:5000/api/events?sortBy=${sortBy}`);
                 setEvents(response.data);
             } catch (error) {
@@ -18,9 +17,8 @@ const EventsBoard = () => {
         };
 
         fetchEvents();
-    }, [sortBy]); // Викликаємо запит щоразу при зміні сортування
+    }, [sortBy]);
 
-    // Функція для зміни методу сортування
     const handleSortChange = (e) => {
         setSortBy(e.target.value);
     };
@@ -29,7 +27,7 @@ const EventsBoard = () => {
         <div className="container mx-auto p-4">
             <h1 className="text-2xl text-amber-50 font-bold mb-4">Events Board</h1>
 
-            {/* Випадаючий список для вибору методу сортування */}
+
             <div className="mb-4">
                 <label htmlFor="sort" className="text-amber-50 mr-2">Sort events by:</label>
                 <select
@@ -51,8 +49,8 @@ const EventsBoard = () => {
                         <p className="text-amber-900">Date: {event.eventDate}</p>
                         <p className="text-amber-400">Organizer: {event.organizer}</p>
                         <div className="mt-4 flex justify-between">
-                            <Link to={`/register/${event.id}`} className="mr-2 bg-blue-500 text-white py-2 px-4 rounded">Register</Link>
-                            <Link to={`/participants/${event.id}`} className="bg-green-500 text-white py-2 px-4 rounded">View Participants</Link>
+                            <Link to={`/register/${event.id}`} className="mr-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">Register</Link>
+                            <Link to={`/participants/${event.id}`} className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300">View Participants</Link>
                         </div>
                     </div>
                 ))}

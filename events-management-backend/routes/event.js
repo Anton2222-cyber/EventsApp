@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const Event = require('../models/Event');
 
-// Отримати всі події
+
 router.get('/', (req, res) => {
-    const sortBy = req.query.sortBy || 'title'; // Отримуємо поле сортування, за замовчуванням 'title'
+    const sortBy = req.query.sortBy || 'title';
 
     Event.sortEvents(sortBy, (err, events) => {
         if (err) {
@@ -14,7 +14,6 @@ router.get('/', (req, res) => {
     });
 });
 
-// Отримати подію за ID
 router.get('/:id', (req, res) => {
     const eventId = req.params.id;
     Event.getEventById(eventId, (err, event) => {
@@ -28,7 +27,6 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// Створити нову подію
 router.post('/', (req, res) => {
     const { title, eventDate, organizer, description } = req.body;
     Event.createEvent(title, eventDate, organizer, description, function(err) {

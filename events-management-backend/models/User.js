@@ -12,7 +12,7 @@ const User = {
             [fullName, email, dateOfBirth, source, eventId], callback);
     },
     getUserByEmail: (email, callback) => {
-        db.get("SELECT * FROM users WHERE email = ?", [email], callback); // Додаємо новий метод
+        db.get("SELECT * FROM users WHERE email = ?", [email], callback);
     },
 };
 
