@@ -6,13 +6,16 @@ import Participants from './components/Participants';
 
 const App = () => {
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<EventsBoard />} />
-                <Route path="/register/:id" element={<Register />} />
-                <Route path="/participants/:id" element={<Participants />} />
-            </Routes>
-        </Router>
+        <div className="min-h-screen bg-gray-900">
+            <Router>
+                <Routes>
+                    <Route path="/" element={<EventsBoard />} />
+                    <Route path="/register/:id" element={<Register />} />
+                    <Route path="/participants/:id" element={<Participants />} />
+                </Routes>
+            </Router>
+
+        </div>
     );
 };
 

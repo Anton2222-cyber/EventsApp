@@ -27,13 +27,25 @@ router.get('/:id', (req, res) => {
 });
 
 // Створити нового користувача
-router.post('/', (req, res) => {
-    const { fullName, email, dateOfBirth, source, eventId } = req.body;
-    User.createUser(fullName, email, dateOfBirth, source, eventId, function(err) {
+router.post('/', async (req, res) => {
+    const {fullName, email, dateOfBirth, source, eventId} = req.body;
+
+    // Перевірка, чи існує користувач з таким email
+    User.getUserByEmail(email, (err, existingUser) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
-        res.status(201).json({ message: 'User created successfully' });
+        if (existingUser) {
+            return res.status(400).json({ message: 'Email already registered' });
+        }
+
+        // Якщо користувача немає, створюємо нового
+        User.createUser(fullName, email, dateOfBirth, source, eventId, function (err) {
+            if (err) {
+                return res.status(500).json({ error: err.message });
+            }
+            res.status(201).json({ message: 'User created successfully' });
+        });
     });
 });
 

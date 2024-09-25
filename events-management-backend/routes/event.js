@@ -4,7 +4,9 @@ const Event = require('../models/Event');
 
 // Отримати всі події
 router.get('/', (req, res) => {
-    Event.getAllEvents((err, events) => {
+    const sortBy = req.query.sortBy || 'title'; // Отримуємо поле сортування, за замовчуванням 'title'
+
+    Event.sortEvents(sortBy, (err, events) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
