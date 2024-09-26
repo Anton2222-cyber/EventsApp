@@ -11,7 +11,7 @@ const Participants = () => {
         const fetchParticipants = async () => {
             try {
                 console.log("Fetching participants for event with ID:", eventId);
-                const response = await axios.get(`http://localhost:5000/api/events/${eventId}/participants`);
+                const response = await axios.get(`https://events-api.tohaproject.click/api/events/${eventId}/participants`);
                 setParticipants(response.data);
             } catch (error) {
                 console.error('Error fetching participants:', error);

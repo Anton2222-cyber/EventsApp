@@ -55,7 +55,7 @@ const Register = () => {
 
         try {
             user.eventId = eventId;
-            await axios.post(`http://localhost:5000/api/users`, user);
+            await axios.post(`https://events-api.tohaproject.click/api/users`, user);
             navigate('/');
         } catch (error) {
             if (error.response && error.response.status === 400) {

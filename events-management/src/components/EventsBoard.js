@@ -9,7 +9,8 @@ const EventsBoard = () => {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/events?sortBy=${sortBy}`);
+                // const response = await axios.get(`http://localhost:5000/api/events?sortBy=${sortBy}`);
+                 const response = await axios.get(`https://events-api.tohaproject.click/api/events?sortBy=${sortBy}`);
                 setEvents(response.data);
             } catch (error) {
                 console.error('Error fetching events:', error);
